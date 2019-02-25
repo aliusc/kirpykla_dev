@@ -4,7 +4,7 @@ class Kirpykla
     public $pdo;
 
     public function __construct(){
-        $dsn = sprintf('mysql:host=%s;dbname=%s;charset=%s', DB_HOST, DB_DATABASE, DB_CHARSET);
+        $dsn = sprintf('mysql:host=%s;dbname=%s', DB_HOST, DB_DATABASE, DB_CHARSET);
         $options = [
             PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,

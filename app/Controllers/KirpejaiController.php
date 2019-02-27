@@ -14,7 +14,7 @@ class KirpejaiController extends BaseController
     private $template;
     private $model;
 
-    CONST PAGING_SIZE = 2;
+    CONST PAGING_SIZE = 10;
 
     public function __construct($fun_name = null, $params = null, $post = null)
     {

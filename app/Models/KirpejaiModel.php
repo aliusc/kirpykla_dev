@@ -2,7 +2,6 @@
 
 namespace kirpykla_dev\Models;
 
-//shows some data on the homepage
 class KirpejaiModel extends BaseModel
 {
     private $conn;

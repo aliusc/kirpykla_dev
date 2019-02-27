@@ -70,7 +70,7 @@
 
     function CancelReservation (id) {
         if(confirm("Atšaukti šią rezervaciją?")) {
-            document.location.href = '?page=cancel_kirpejo_rezervacija&id='+id;
+            document.location.href = '?page=cancel_kirpejo_rezervacija&next_page=<?=urlencode('kirpejai_list&data='.$this->e($data))?>&id='+id;
         }
     }
 </script>

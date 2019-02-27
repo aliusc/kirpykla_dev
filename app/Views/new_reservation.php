@@ -29,6 +29,7 @@
         <tr>
             <td colspan="2" align="right">
                 <input type="hidden" name="page" value="new_kirpejo_rezervacija_save">
+                <input type="hidden" name="next_page" id="next_page" value="<?=urlencode('kirpejai_list&data='.$this->e($data))?>">
                 <input type="button" id="action_button" value="Registruoti"></td>
         </tr>
     </table>
@@ -51,6 +52,10 @@
                         // return false;
                     }
                 });
+        });
+
+        $("#datepicker").change(function() {
+            $("#next_page").val(encodeURI('kirpejai_list&data='+$(this).val()));
         });
     });
 </script>

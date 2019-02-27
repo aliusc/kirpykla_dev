@@ -2,8 +2,6 @@
 
 namespace kirpykla_dev\Models;
 
-//shows some data on the homepage
-use function MongoDB\BSON\toJSON;
 
 class KlientaiModel extends BaseModel
 {
@@ -83,7 +81,7 @@ class KlientaiModel extends BaseModel
 
     public function RegisterNewClient($klientas_name) {
         $klientas_name = $this->check_db($this->conn, $klientas_name);
-        echo $query = "INSERT INTO $this->klientai_table (kliento_vardas, kliento_stat) VALUES ('$klientas_name', 0)";
+        $query = "INSERT INTO $this->klientai_table (kliento_vardas, kliento_stat) VALUES ('$klientas_name', 0)";
         $this->sql($this->conn, $query);
         return mysqli_insert_id($this->conn);
     }

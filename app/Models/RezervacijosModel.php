@@ -2,7 +2,6 @@
 
 namespace kirpykla_dev\Models;
 
-//shows some data on the homepage
 class RezervacijosModel extends BaseModel
 {
     private $conn;
@@ -11,10 +10,10 @@ class RezervacijosModel extends BaseModel
     const DAY_END = '20:00:00';
 
     private $sort_cols_mapper = array(
-        'time' => 'rezervacijos_laikas',
-        'stat' => 'kliento_stat',
-        'kirpejas' => 'kirpejo_vardas',
-        'klientas' => 'kliento_vardas'
+        'time' => ['rezervacijos_data ASC', 'rezervacijos_laikas ASC'],
+        'stat' => 'kliento_stat DESC',
+        'kirpejas' => 'kirpejo_vardas ASC',
+        'klientas' => 'kliento_vardas ASC'
     );
 
     function __construct()
@@ -30,7 +29,12 @@ class RezervacijosModel extends BaseModel
 
         if(!empty($sort) && array_key_exists($sort, $this->sort_cols_mapper)) {
             $sort_column = $this->sort_cols_mapper[$sort];
-            $sort = " ORDER BY $sort_column";
+            if(is_array($sort_column)) {
+                $sort = " ORDER BY ".implode(',', $sort_column);
+            }
+            else {
+                $sort = " ORDER BY $sort_column";
+            }
         }
 
         $query = "SELECT $this->rezervacijos_table.*, kirpejo_vardas, kliento_vardas, kliento_stat 
@@ -43,7 +47,23 @@ class RezervacijosModel extends BaseModel
         $sql = $this->sql($this->conn, $query);
         $results = $this->SqlResultsToArray($sql);
 
-        return !empty($results) ? $results : array();
+        return $results;
+    }
+
+    public function GetReservationById($resevation_id) {
+        $resevation_id = $this->check_db($this->conn, $resevation_id);
+
+        $query = "SELECT $this->rezervacijos_table.*, kirpejo_vardas, kliento_vardas, kliento_stat 
+                  FROM $this->rezervacijos_table
+                  INNER JOIN $this->kirpejai_table ON rezervacijos_kirpejo_id=kirpejo_id 
+                  INNER JOIN $this->klientai_table ON rezervacijos_kliento_id=kliento_id 
+                  WHERE 
+                    rezervacijos_aktyvus='1' AND rezervacijos_id='$resevation_id'
+                   ";
+        $sql = $this->sql($this->conn, $query);
+        $results = $this->SqlResultsToArray($sql);
+
+        return $results[0];
     }
 
     public function GetWorkingTimes($only_future = false) {
@@ -62,7 +82,7 @@ class RezervacijosModel extends BaseModel
         return $booking_times;
     }
 
-    public function ChecRegistrationAvailable($kirpejo_id, $data, $laikas) {
+    public function CheckRegistrationAvailable($kirpejo_id, $data, $laikas) {
         $kirpejo_id = $this->check_db($this->conn, $kirpejo_id);
         $data = $this->check_db($this->conn, $data);
         $laikas = $this->check_db($this->conn, $laikas);
@@ -76,13 +96,27 @@ class RezervacijosModel extends BaseModel
         return mysqli_num_rows($sql)==0;
     }
 
+    public function CheckClientHaveNoFutureRegistrations($kliento_id) {
+        $query = "SELECT rezervacijos_id FROM $this->rezervacijos_table 
+            WHERE 
+                (
+                    rezervacijos_data > NOW() 
+                    OR 
+                    (rezervacijos_data = NOW() AND rezervacijos_laikas > NOW())
+                 ) AND  
+                rezervacijos_kliento_id='$kliento_id' AND 
+                rezervacijos_aktyvus='1'";
+        $sql = $this->sql($this->conn, $query);
+        return mysqli_num_rows($sql)==0;
+    }
+
     public function RegistrationSave($kirpejo_id, $kliento_id, $data, $laikas) {
         $kirpejo_id = $this->check_db($this->conn, $kirpejo_id);
         $kliento_id = $this->check_db($this->conn, $kliento_id);
         $data = $this->check_db($this->conn, $data);
         $laikas = $this->check_db($this->conn, $laikas);
 
-        echo $query = "INSERT INTO $this->rezervacijos_table (
+        $query = "INSERT INTO $this->rezervacijos_table (
             rezervacijos_data, 
             rezervacijos_laikas, 
             rezervacijos_kirpejo_id, 
@@ -90,11 +124,13 @@ class RezervacijosModel extends BaseModel
             rezervacijos_aktyvus)
             VALUES ('$data', '$laikas', '$kirpejo_id', '$kliento_id', '1')";
         $this->sql($this->conn, $query);
+
+        return mysqli_insert_id($this->conn);
     }
 
     public function RegistrationCancel($reservation_id) {
         $reservation_id = $this->check_db($this->conn, $reservation_id);
-        echo $query = "UPDATE $this->rezervacijos_table SET rezervacijos_aktyvus='0' WHERE rezervacijos_id='$reservation_id'";
+        $query = "UPDATE $this->rezervacijos_table SET rezervacijos_aktyvus='0' WHERE rezervacijos_id='$reservation_id'";
         $this->sql($this->conn, $query);
     }
 }

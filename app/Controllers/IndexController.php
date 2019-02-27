@@ -15,6 +15,5 @@ class IndexController extends BaseController
     {
         $templates = new Engine(BASE.DS.'Views');
         echo $templates->render('index_page', ['title' => 'Kirpykla index page']);
-        echo $rez;
     }
 }

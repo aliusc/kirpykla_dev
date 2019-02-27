@@ -18,12 +18,11 @@ class Kirpejas extends Human {
 }
 
 class Klientas extends Human {
-    public $stat;
 
     public function __construct($id, $vardas, $stat)
     {
         parent::__construct($id, $vardas);
-        $this->stat = $stat;
+
     }
 }
 

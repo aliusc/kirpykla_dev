@@ -10,3 +10,23 @@ html, body {
 .lentele {
     border: 1px solid black;
 }
+
+.cell_available {
+    background-color: palegreen;
+    cursor: pointer;
+}
+.cell_booked {
+    background-color: lightpink;
+}
+
+th, .td_laikai {
+background-color: aquamarine;
+}
+.aktyvi_rezervacija_block {
+    background-color: khaki;
+    border: 1px solid coral;
+    border-radius: 3px;
+    width: 700px;
+    padding: 10px;
+    margin: 20px 0;
+}

@@ -7,7 +7,6 @@ use PDO;
 //shows some data on the homepage
 class BaseModel
 {
-    protected $data;
     public $kirpejai_table = "tb_kirpejai";
     public $klientai_table = "tb_klientai";
     public $rezervacijos_table = "tb_rezervacijos";
@@ -20,41 +19,8 @@ class BaseModel
     }
 
     public function connect() {
-        /*$pdo = new PDOConnector(
-            DB_HOST, // server
-            DB_USER,      // user
-            DB_PASS,      // password
-            DB_DATABASE   // database
-        );
 
-        $pdoConn = $pdo->connect('utf8', []); // charset, options
-
-        $dbConn = new Mysql($pdoConn);
-
-        return $dbConn;*/
-
-        /*$db_class = new MeekroDB();
-
-        $host = DB_HOST;
-        $db   = DB_DATABASE;
-        $user = DB_USER;
-        $pass = DB_PASS;
-        $charset = 'utf8mb4';
-
-        $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
-        $options = [
-            PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-            PDO::ATTR_EMULATE_PREPARES   => false,
-        ];
-        try {
-            $pdo = new PDO($dsn, $user, $pass, $options);
-        } catch (\PDOException $e) {
-            throw new \PDOException($e->getMessage(), (int)$e->getCode());
-        }
-
-        return $pdo;*/
-
+        //leiskime tik 1 prisijungima
         if(empty($this->connection)) {
             $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_DATABASE);
             if (mysqli_connect_error()) {
@@ -72,7 +38,7 @@ class BaseModel
     public function SqlResultsToArray($sql)
     {
         $return = array();
-        if (!$sql || mysqli_num_rows($sql) == 0) {
+        if (!$sql) {
             return false;
         }
 
@@ -90,7 +56,7 @@ class BaseModel
     }
 
     public function check_db($conn,$text) {
-
+        //DB escaping toolsas
         $text = str_replace(['%', '´'], ['', ''], $text);
         if (!get_magic_quotes_gpc()) {
             $text = addslashes($text);

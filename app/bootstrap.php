@@ -37,14 +37,17 @@ switch ($qs_array['page']) {
     case ('new_kirpejo_rezervacija'):
         $buff = new Controllers\KirpejaiController($qs_array['page'], $qs_array);
         break;
-    case ('new_kirpejo_rezervacija_save'):
-        $buff = new Controllers\RezervacijosController($qs_array['page'], $qs_array);
-        break;
     case ('cancel_kirpejo_rezervacija'):
         $buff = new Controllers\RezervacijosController($qs_array['page'], $qs_array);
         break;
 
     case ('kliento_puslapis'):
+        $buff = new Controllers\RezervacijosController($qs_array['page'], $qs_array);
+        break;
+    case ('new_kirpejo_rezervacija_save'):
+        $buff = new Controllers\RezervacijosController($qs_array['page'], $qs_array);
+        break;
+    case ('save_client_registration'):
         $buff = new Controllers\RezervacijosController($qs_array['page'], $qs_array);
         break;
 

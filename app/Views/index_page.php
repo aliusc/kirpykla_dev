@@ -4,7 +4,7 @@
 
 <p>Pasirinkite:</p>
 <p><a href="?page=kirpejai_list">Esu KIRPĖJAS</a></p>
-<p><a href="?page=nameslist">Esu KLIENTAS</a></p>
+<p><a href="?page=kliento_puslapis">Esu KLIENTAS</a></p>
 
 
 

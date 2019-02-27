@@ -22,20 +22,32 @@ $qs = $_SERVER['QUERY_STRING'];
 if(!empty($qs)) {
     parse_str($qs, $qs_array);
 }
+$ps_array = $_POST;
 $method = !empty($_POST) ? 'POST' : 'GET';
 
 //primitive routing
-
+//print_r($qs_array);
 switch ($qs_array['page']) {
     case ('kirpejai_list'):
-        $buff = new Controllers\KirpejaiController($qs_array['page']);
+        $buff = new Controllers\KirpejaiController($qs_array['page'], $qs_array);
+        break;
+    case ('check_registration_valid'):
+        $buff = new Controllers\RezervacijosController($qs_array['page'], $qs_array);
+        break;
+    case ('new_kirpejo_rezervacija'):
+        $buff = new Controllers\KirpejaiController($qs_array['page'], $qs_array);
+        break;
+    case ('new_kirpejo_rezervacija_save'):
+        $buff = new Controllers\RezervacijosController($qs_array['page'], $qs_array);
+        break;
+    case ('cancel_kirpejo_rezervacija'):
+        $buff = new Controllers\RezervacijosController($qs_array['page'], $qs_array);
+        break;
 
+    case ('kliento_puslapis'):
+        $buff = new Controllers\RezervacijosController($qs_array['page'], $qs_array);
         break;
-    case ('/about'):
-        $buff = new Controllers\AboutController([
-            BASE . '/Views/default.php'
-        ]);
-        break;
+
     default:
         new Controllers\IndexController();
         break;

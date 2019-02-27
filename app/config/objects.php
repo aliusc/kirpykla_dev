@@ -1,6 +1,6 @@
 <?php
 
-class Klientas {
+class Human {
 
     public $id;
     public $vardas;
@@ -10,11 +10,21 @@ class Klientas {
         $this->id = $id;
         $this->vardas = $vardas;
     }
+}
+
+class Kirpejas extends Human {
+
 
 }
 
-class Kirpejas extends Klientas {
+class Klientas extends Human {
+    public $stat;
 
+    public function __construct($id, $vardas, $stat)
+    {
+        parent::__construct($id, $vardas);
+        $this->stat = $stat;
+    }
 }
 
 class Rezervacija {

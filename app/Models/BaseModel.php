@@ -12,6 +12,8 @@ class BaseModel
     public $klientai_table = "tb_klientai";
     public $rezervacijos_table = "tb_rezervacijos";
 
+    protected $connection;
+
     function __construct()
     {
 
@@ -53,15 +55,18 @@ class BaseModel
 
         return $pdo;*/
 
-        $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_DATABASE);
-        if(mysqli_connect_error()) {
+        if(empty($this->connection)) {
+            $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_DATABASE);
+            if (mysqli_connect_error()) {
 //            throw new Exception('DB connect error');
+            }
+            mysqli_query($conn, 'SET NAMES utf8');
+            mysqli_query($conn, 'SET CHARACTER SET utf8');
+            mysqli_set_charset($conn, 'utf8');
+            $this->connection = $conn;
         }
-        mysqli_query($conn, 'SET NAMES utf8');
-        mysqli_query($conn, 'SET CHARACTER SET utf8');
-        mysqli_set_charset($conn,'utf8');
 
-        return $conn;
+        return $this->connection;
     }
 
     public function SqlResultsToArray($sql)

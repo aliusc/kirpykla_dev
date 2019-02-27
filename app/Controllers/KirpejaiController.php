@@ -5,6 +5,7 @@ namespace kirpykla_dev\Controllers;
 //use kirpykle_dev\Models\KirpejaiModel;
 use function Couchbase\passthruEncoder;
 use kirpykla_dev\Models\KirpejaiModel;
+use kirpykla_dev\Models\KlientaiModel;
 use kirpykla_dev\Models\RezervacijosModel;
 use League\Plates\Engine;
 
@@ -40,8 +41,8 @@ class KirpejaiController extends BaseController
 
 //        $kirpeju_sarasas = $kirpejai_model->GetKirpejaiList();
 //        $imanomi_laikai = $rezervacijos_model->GetWorkingTimes(false);
-        print_r($params);
-        print_r($post);
+//        print_r($params);
+//        print_r($post);
         $date = isset($params['data']) ? $params['data'] : date("Y-m-d");
         $name = isset($params['klientas']) ? $params['klientas'] : '';
         $sort = isset($params['sort']) ? $params['sort'] : 'stat';
@@ -52,7 +53,9 @@ class KirpejaiController extends BaseController
 
         list($prev_page, $next_page, $dienos_rezervacijos) = $this->ProcessListPaging($dienos_rezervacijos, $page_number);
 
-        $user_stats = $this->GetUserStatsFromReservationList($dienos_rezervacijos);
+        $user_stats = $this->GetUserStatsForReservationList($dienos_rezervacijos);
+//        print_r($dienos_rezervacijos);
+//        print_r($user_stats);
 
 //        print_r($kirpeju_sarasas);
 //        print_r($imanomi_laikai);
@@ -65,7 +68,8 @@ class KirpejaiController extends BaseController
             'klientas' => $name,
             'url' => $qs,
             'prev_page' => $prev_page,
-            'next_page' => $next_page
+            'next_page' => $next_page,
+            'stat' => $user_stats
         ]);
     }
 
@@ -94,13 +98,16 @@ class KirpejaiController extends BaseController
         return array($prev_page, $next_page, $sarasas_return);
     }
 
-    private function GetUserStatsFromReservationList($dienos_rezervacijos) {
+    private function GetUserStatsForReservationList($dienos_rezervacijos) {
         $klientu_idai = array();
         foreach ($dienos_rezervacijos as $d) {
-            $klientu_idai = $d['rezervacijos_kliento_id'];
+            $klientu_idai[] = $d['rezervacijos_kliento_id'];
         }
         $klientu_idai = array_unique($klientu_idai);
 
-        $klientu_model =
+        $klientu_model = new KlientaiModel();
+        $klientu_stats = $klientu_model->GetKlientaiStat($klientu_idai);
+
+        return $klientu_stats;
     }
 }

@@ -2,8 +2,8 @@
 echo '<td>'.$this->e(substr($k['rezervacijos_laikas'],0,-3)).'</td>
 <td>'.$this->e($k['kirpejo_vardas']).'</td>
 <td>'.$this->e($k['kliento_vardas']).'</td>
-<td>'.$this->e($k['kliento_stat']).' ';
-if($k['kliento_stat']>0 && $k['kliento_stat']%5==0) {
+<td>'.$stat[$k['rezervacijos_kliento_id']].' ';
+if($stat[$k['rezervacijos_kliento_id']]>0 && $stat[$k['rezervacijos_kliento_id']]%5==0) {
     echo '<span class="nuolaida">!</span>';
 }
 echo '</td>

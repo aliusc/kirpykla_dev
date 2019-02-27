@@ -32,17 +32,17 @@
 <table cellpadding="1" cellspacing="1" border="1" width="700" class="lentele">
     <thead>
         <tr>
-            <th>Laikas <a href="?<?=$this->e($url)?>&sort=time">Sort</a></th>
-            <th>Kirpejas <a href="?<?=$this->e($url)?>&sort=kirpejas">Sort</a></th>
-            <th>Klientas <a href="?<?=$this->e($url)?>&sort=klientas">Sort</a></th>
-            <th>Kelintas apsilankymas <a href="?<?=$this->e($url)?>&sort=stat">Sort</a></th>
+            <th>Laikas <a href="?<?=$this->e($url)?>&sort=time"><img src="img/sort.svg" height="20"/></th>
+            <th>Kirpejas <a href="?<?=$this->e($url)?>&sort=kirpejas"><img src="img/sort.svg" height="20"/></a></th>
+            <th>Klientas <a href="?<?=$this->e($url)?>&sort=klientas"><img src="img/sort.svg" height="20"/></a></th>
+            <th>Kelintas apsilankymas <a href="?<?=$this->e($url)?>&sort=stat"><img src="img/sort.svg" height="20"/></a></th>
             <th></th>
         </tr>
     </thead>
     <tbody>
         <?php
         foreach ($kirpejai as $k) {
-            echo $this->fetch('page_parts/reservation_list_element', ['k' => $k]);
+            echo $this->fetch('page_parts/reservation_list_element', ['k' => $k, 'stat' => $stat]);
         }
         ?>
     </tbody>

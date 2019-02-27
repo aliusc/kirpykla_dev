@@ -91,4 +91,8 @@ class RezervacijosController extends BaseController
         }
         header('Location: ?page=kirpejai_list');
     }
+
+    private function kliento_puslapis($params) {
+
+    }
 }

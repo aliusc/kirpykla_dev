@@ -24,9 +24,7 @@ class KlientaiModel extends BaseModel
 
     public function UpdateKlientaiStat($id = false) {
         $stat = $this->GetKlientaiStat($id);
-        foreach ($stat as $s) {
-            $kl_id = $s['id'];
-            $kl_stat = $s['stat'];
+        foreach ($stat as $kl_id => $kl_stat) {
             $query = "UPDATE $this->klientai_table
                         SET kliento_stat=$kl_stat
                         WHERE kliento_id=$kl_id";
@@ -35,7 +33,15 @@ class KlientaiModel extends BaseModel
     }
 
     public function GetKlientaiStat($id = false) {
-        $where = !empty($id) ? " AND rezervacijos_kliento_id = $id " : '';
+        if(is_array($id) && !empty($id)) {
+            $where = " AND rezervacijos_kliento_id IN (".implode(',', $id).") ";
+        }
+        else {
+            $where = !empty($id) ? " AND rezervacijos_kliento_id = $id " : '';
+        }
+        $stats = array();
+
+        //stat tik uz senesnes uz NOW registracijas kurios neatsauktos
         $query = "SELECT rezervacijos_kliento_id as id, 
                     COUNT(rezervacijos_id) as stat 
                     FROM $this->rezervacijos_table 
@@ -47,7 +53,11 @@ class KlientaiModel extends BaseModel
         $sql = $this->sql($this->conn, $query);
         $results = $this->SqlResultsToArray($sql);
 
-        return $results;
+        foreach ($results as $r) {
+            $stats[$r['id']] = $r['stat'];
+        }
+
+        return $stats;
     }
 
     public function GetRegisterClient($klientas_name) {

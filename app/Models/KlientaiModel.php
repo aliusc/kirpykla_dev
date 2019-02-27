@@ -44,8 +44,11 @@ class KlientaiModel extends BaseModel
                     COUNT(rezervacijos_id) as stat 
                     FROM $this->rezervacijos_table 
                     WHERE rezervacijos_aktyvus = '1' AND 
-                      rezervacijos_data <= NOW() AND 
-                      rezervacijos_laikas <= NOW()
+                      (
+                            rezervacijos_data < NOW() 
+                            OR 
+                            (rezervacijos_data <= NOW() AND rezervacijos_laikas < NOW())
+                         )
                       $where
                     GROUP BY rezervacijos_kliento_id";
         $sql = $this->sql($this->conn, $query);

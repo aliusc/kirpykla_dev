@@ -33,3 +33,9 @@ background-color: aquamarine;
 input, select {
     width: 170px;
 }
+.list_data {
+    color: darkgrey;
+}
+.list_laikas {
+    color: darkorange;
+}

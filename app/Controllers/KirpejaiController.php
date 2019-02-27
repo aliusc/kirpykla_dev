@@ -39,27 +39,17 @@ class KirpejaiController extends BaseController
         $kirpejai_model = new KirpejaiModel();
         $rezervacijos_model = new RezervacijosModel();
 
-//        $kirpeju_sarasas = $kirpejai_model->GetKirpejaiList();
-//        $imanomi_laikai = $rezervacijos_model->GetWorkingTimes(false);
-//        print_r($params);
-//        print_r($post);
         $date = isset($params['data']) ? $params['data'] : date("Y-m-d");
         $name = isset($params['klientas']) ? $params['klientas'] : '';
         $sort = isset($params['sort']) ? $params['sort'] : 'stat';
         $page_number = isset($params['page_num']) && is_numeric($params['page_num']) ? $params['page_num'] : 1;
-
 
         $dienos_rezervacijos = $rezervacijos_model->GetReservations($date, $name, $sort);
 
         list($prev_page, $next_page, $dienos_rezervacijos) = $this->ProcessListPaging($dienos_rezervacijos, $page_number);
 
         $user_stats = $this->GetUserStatsForReservationList($dienos_rezervacijos);
-//        print_r($dienos_rezervacijos);
-//        print_r($user_stats);
 
-//        print_r($kirpeju_sarasas);
-//        print_r($imanomi_laikai);
-//        print_r($dienos_rezervacijos);
         $qs = http_build_query($params);
         echo $this->template->render('reservation_list', [
             'title' => 'Kirpejo pasirinkimas',
@@ -104,10 +94,8 @@ class KirpejaiController extends BaseController
             $klientu_idai[] = $d['rezervacijos_kliento_id'];
         }
         $klientu_idai = array_unique($klientu_idai);
-
         $klientu_model = new KlientaiModel();
         $klientu_stats = $klientu_model->GetKlientaiStat($klientu_idai);
-
         return $klientu_stats;
     }
 }

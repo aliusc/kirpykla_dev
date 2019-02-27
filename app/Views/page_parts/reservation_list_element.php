@@ -1,5 +1,5 @@
 <tr><?php
-echo '<td>'.$this->e($k['rezervacijos_data']).' '.$this->e(substr($k['rezervacijos_laikas'],0,-3)).'</td>
+echo '<td><span class="list_data">'.$this->e($k['rezervacijos_data']).'</span> <span class="list_laikas">'.$this->e(substr($k['rezervacijos_laikas'],0,-3)).'</span></td>
 <td>'.$this->e($k['kirpejo_vardas']).'</td>
 <td>'.$this->e($k['kliento_vardas']).'</td>
 <td>'.$stat[$k['rezervacijos_kliento_id']].' ';

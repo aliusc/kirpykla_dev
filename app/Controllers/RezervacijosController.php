@@ -85,7 +85,6 @@ class RezervacijosController extends BaseController
         $laikas = $params['time'];
         $klientas = $params['klientas'];
 
-        $msg = '';
         $registracijos_id = false;
         if(empty($kirpejo_id) || empty($data) || empty($laikas) || empty($klientas)) {
             $error = true;
@@ -168,8 +167,6 @@ class RezervacijosController extends BaseController
             $date_booking = strtotime($params['data'].' '.$params['time']);
             $date_now = time();
             $date_diff_in_seconds = $date_booking-$date_now;
-//            setcookie("kirpykla_data", $params['data'], time() + $date_diff_in_seconds);
-//            setcookie("kirpykla_laikas", $params['time'], time() + $date_diff_in_seconds);
             setcookie("kirpykla_reg_id", $reg_id, time() + $date_diff_in_seconds);
         }
         header("Location: ?page=".urldecode($params['next_page']));

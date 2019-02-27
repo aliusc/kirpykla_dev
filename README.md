@@ -32,7 +32,7 @@ Lentelėje rodomą informaciją galima surikiuoti pagal ten esančius stulpelius
 Apsilankymų skaičiaus stulpelyje kuomet klientui tai jau 5-10-15 ar kt. vizitas bus rodomas raudonas tekstas "nuolaida!".
 Paskutiniame stulpelyje paspaudus šiukšlių dėžės ikoną leis rezervaciją atšaukti. 
 
-Lentelėje rodomi ne daugiau kaip 5 įrašai. Jeigu įrašų skaičius lentelėje yra didesnis tuomet per puslapius galima 
+Lentelėje rodomi ne daugiau kaip 10 įrašų. Jeigu įrašų skaičius lentelėje yra didesnis tuomet per puslapius galima 
 vaikščioti
 spaudant po lentele esančias nuorodas ***Pirmyn*** ir ***Atgal***.
 

@@ -1,0 +1,19 @@
+{
+    "name": "alius.c/kirpykla_dev",
+    "description": "NFQ mokykla",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Alius Cesnavicius",
+            "email": "aliusc@gmail.com"
+        }
+    ],
+    "require": {
+        "league/plates": "^3.3"
+    },
+    "config": {
+        "platform": {
+            "php": "5.6.34"
+        }
+	}
+}

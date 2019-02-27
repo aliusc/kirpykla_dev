@@ -14,5 +14,4 @@ else {
     define('DB_PASS', $url["pass"]);
     define('DB_DATABASE', substr($url["path"], 1));
     define('DB_CHARSET', 'utf8_binnacry_ci');
-    print_r($url);
 }

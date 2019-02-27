@@ -64,7 +64,7 @@ fonas. Norint rezervuoti norimą laiką pas norimą kirpėją reikia paspausti j
 dialogas prašantis įvesti ***Kliento vardą***. Patvirtinus vėl atliekami tikrinimai (žr. kirpėjo skiltį *Nauja rezervacija*).
 Registracijai pavykus langas perpiešiamas ir ši celė turi būti rodoma kaip rezervuota. 
 
-###Rezervacijos priminimas
+### Rezervacijos priminimas
 
 Pavykus registracijai virš filtro geltoname fone rodomas priminimas apie galiojančia rezervaciją. Jame rašoma ir data, 
 laikas bei kirpėjas pas kurį yra rezervuotas vizitas. Jeigu dėl vizito persigalvosite - šalia teksto yra ikona "šiukšlių 

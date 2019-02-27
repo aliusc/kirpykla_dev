@@ -15,7 +15,7 @@ spl_autoload_register(function($class) {
 });
 
 // include the composer autoloader
-require 'vendor/autoload.php';
+require '../vendor/autoload.php';
 
 $qs = $_SERVER['QUERY_STRING'];
 

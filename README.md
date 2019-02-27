@@ -10,7 +10,7 @@ Kirpyklos rezervavimo sistemą sudaro dvi dalys:
 * Klientų zona
 
 ## Kirpėjų zona
-Kirpyklos darbuotojai užsukę į šią zoną pagal išvysta rezervacijų filtrus ir esamus 
+Kirpyklos darbuotojai užsukę į šią zoną išvysta rezervacijų filtrus ir esamus 
 užsakymus, galimybę rezervuoti naujus ar atšaukti esamus užsakymus.
 
 ### Rezervacijų peržiūros langas
@@ -32,7 +32,7 @@ Lentelėje rodomą informaciją galima surikiuoti pagal ten esančius stulpelius
 Apsilankymų skaičiaus stulpelyje kuomet klientui tai jau 5-10-15 ar kt. vizitas bus rodomas raudonas tekstas "nuolaida!".
 Paskutiniame stulpelyje paspaudus šiukšlių dėžės ikoną leis rezervaciją atšaukti. 
 
-Lentelėje rodomi ne daugiau kaip 5 įrašai. Jeigu įrašų skaičius lentelėje yra didesnis tuomet per puslapius galima 
+Lentelėje rodomi ne daugiau kaip 10 įrašų. Jeigu įrašų skaičius lentelėje yra didesnis tuomet per puslapius galima 
 vaikščioti
 spaudant po lentele esančias nuorodas ***Pirmyn*** ir ***Atgal***.
 
@@ -56,10 +56,10 @@ Esant klaidai bus parodytas pranešimas su atitinkamu tekstu.
 Kliento zona leidžia klientui pačiam užsirezervuoti vizito į kirpyklą laiką. 
 
 ### Užimtumo lentelės peržiūra ir rezervavimas
-Užsukus į šią zoną rodomas vienintelis filtras - ***Datos*** pasirinkimas. Pagal nutylėjimą rodomi šiuos dienos *dar likę* 
-laikai, t.y. esantys vėliau nei dabartinis laikas. Jeigu klientas pasirinks kitą ateities datą iš kalendoriaus ir
+Užsukus į šią zoną rodomas vienintelis filtras - ***Datos*** pasirinkimas. Pagal nutylėjimą rodomi šios dienos *dar likę* 
+laikai, t.y. esantys vėliau nei dabartinis laikas. Jeigu klientas pasirinks iš kalendoriaus tolimesnę datą ir
 paspaus ***Rodyti***, tuomet bus rodomi visi visų kirpėjų darbo laikai nuo 10:00 iki 20:00. Laiko eilutės ir kirpėjo 
-stulpelio susikirtime raudoname fone rodoma *rezervuota* jeigu tas laikas jau užimtas. Laisvi laikai rodomi kaip žalias
+stulpelio susikirtime jeigu tas laikas jau užimtas raudoname fone rodoma *rezervuota*. Laisvi laikai rodomi kaip žalias
 fonas. Norint rezervuoti norimą laiką pas norimą kirpėją reikia paspausti jų susikirtime esantį žalią foną ir pasirodys
 dialogas prašantis įvesti ***Kliento vardą***. Patvirtinus vėl atliekami tikrinimai (žr. kirpėjo skiltį *Nauja rezervacija*).
 Registracijai pavykus langas perpiešiamas ir ši celė turi būti rodoma kaip rezervuota. 
